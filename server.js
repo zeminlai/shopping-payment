@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const Court = require('./models/court-model.js');
+const VenueInfo = require('./models/venueInfo-model.js')
 
 let cors = require('cors');
 
@@ -62,9 +63,23 @@ app.post("/create-checkout-session", async (req,res) => {
 app.post("/",(req,res) => {
     console.log(req.body)
     const searchCourt = req.body;
-    Court.find(searchCourt,)
+    Court.find(searchCourt)
         .then(result => {
-            res.json(result)
+            const bookedCourt = result
+            // res.json(result)
+
+            VenueInfo.find({venue: searchCourt.venue})
+            .then(result => {
+                const venueInfo = result
+                console.log(venueInfo)
+                // format response to return both venueInfo and bookedCOurt
+                const response = {
+                    venueInfo: {venueInfo},
+                    bookedCourt: {bookedCourt}
+                    }
+                res.json(response)
+            }
+            )
         })
 
 })
