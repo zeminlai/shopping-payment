@@ -24,22 +24,24 @@ app.use(express.urlencoded({extended: true}));
 app.use(morgan("dev"));
 
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
+const bodyParser = require('body-parser');
 
+let items = [];
 
 // shoppping cart checkout 
 app.post("/create-checkout-session", async (req,res) => {
     console.log("fetch successful")
     console.log(req.body.items)
-    const items = req.body.items;
+    items = req.body.items;
    
     const lineItems = items.map(item => {
         return{
             price_data: {
                 currency: 'myr',
                 product_data: {
-                    name: item.title
+                    name: `${item.court.venue} Court ${item.court.court} ${item.court.date} ${item.court.timestart}pm`
                 },
-                unit_amount: (item.price * 100)
+                unit_amount: (item.court.price * 100)
             },
             quantity: 1
         }
@@ -50,10 +52,10 @@ app.post("/create-checkout-session", async (req,res) => {
             payment_method_types: ['card', 'fpx'],
             mode: 'payment',
             line_items: lineItems,
-            success_url:`${process.env.SERVER_URL}/success.html`,
-            cancel_url:`${process.env.SERVER_URL}/cancel.html`,
+            success_url:`${process.env.SERVER_URL}/success`,
+            cancel_url:`${process.env.SERVER_URL}/cancel`,
         })
-        console.log(session.url)
+        // console.log(session.url)
         res.json({url: session.url})
     }catch(e){
         res.status(500).json({error: e.message})
@@ -61,7 +63,7 @@ app.post("/create-checkout-session", async (req,res) => {
 })
 
 app.post("/",(req,res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const searchCourt = req.body;
     Court.find(searchCourt)
         .then(result => {
@@ -83,3 +85,25 @@ app.post("/",(req,res) => {
         })
 
 })
+
+const endpointSecret = "whsec_13efb915ca779f6015b5fb143fe8c58ff4d5272b1b3ec5545f036de6e3e623b6"
+
+const fulfillOrder = (lineItems) => {
+    // TODO: fill me in
+    console.log("Fulfilling order", lineItems);
+  }
+  
+app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request, response) => {
+    const payload = request.body;
+
+    // console.log(payload)
+    if (payload.type === 'checkout.session.completed'){
+        console.log(items)
+        items.forEach(item =>{
+            let court = new Court(item.court)
+            court.save()
+                .catch(err => console.log(err))
+        })
+    }
+    response.status(200);
+  });
