@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const Court = require('./models/court-model.js');
 const VenueInfo = require('./models/venueInfo-model.js')
+const path = __dirname + '/views/build';
 
 let cors = require('cors');
 
@@ -14,12 +15,12 @@ const dbURI = process.env.MONGO_URL;
 
 mongoose.connect(dbURI)
 .then(console.log("connected to db"))
-.then(result => app.listen(4000))
+.then(result => app.listen(8080))
 .catch(err => console.log(err));
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"))
+app.use(express.static(path))
 app.use(express.urlencoded({extended: true}));
 app.use(morgan("dev"));
 
@@ -28,10 +29,14 @@ const bodyParser = require('body-parser');
 
 let items = [];
 
+app.get('/', function (req,res) {
+    res.sendFile(path + "index.html");
+  });
+
 // shoppping cart checkout 
 app.post("/create-checkout-session", async (req,res) => {
     console.log("fetch successful")
-    console.log(req.body.items)
+    // console.log(req.body.items)
     items = req.body.items;
    
     const lineItems = items.map(item => {
@@ -52,8 +57,8 @@ app.post("/create-checkout-session", async (req,res) => {
             payment_method_types: ['card', 'fpx'],
             mode: 'payment',
             line_items: lineItems,
-            success_url:`${process.env.SERVER_URL}/success`,
-            cancel_url:`${process.env.SERVER_URL}/cancel`,
+            success_url:`${process.env.SERVER_URL}/#/success`,
+            cancel_url:`${process.env.SERVER_URL}/#/cancel`,
         })
         // console.log(session.url)
         res.json({url: session.url})
@@ -86,7 +91,7 @@ app.post("/",(req,res) => {
 
 })
 
-const endpointSecret = ENDPOINT_SECRET_STRIPE 
+const endpointSecret = process.env.ENDPOINT_SECRET_STRIPE 
 
 const fulfillOrder = (lineItems) => {
     // TODO: fill me in
@@ -95,9 +100,9 @@ const fulfillOrder = (lineItems) => {
   
 app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request, response) => {
     const payload = request.body;
-
     // console.log(payload)
     if (payload.type === 'checkout.session.completed'){
+        console.log('checkout complete')
         console.log(items)
         items.forEach(item =>{
             let court = new Court(item.court)
