@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
-const conn = process.env.DB_STRING;
+const conn = process.env.MONGO_URL;
 
 const connection = mongoose.createConnection(conn, {
     useNewUrlParser: true,

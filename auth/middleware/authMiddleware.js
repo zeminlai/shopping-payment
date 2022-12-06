@@ -15,7 +15,8 @@ const requireAuth = (req, res, next) => {
       }
     });
   } else {
-    res.redirect('/login');
+    console.log("not yet login")
+    next()
   }
 };
 
