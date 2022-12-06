@@ -86,7 +86,7 @@ app.post("/",(req,res) => {
 
 })
 
-const endpointSecret = "whsec_13efb915ca779f6015b5fb143fe8c58ff4d5272b1b3ec5545f036de6e3e623b6"
+const endpointSecret = ENDPOINT_SECRET_STRIPE 
 
 const fulfillOrder = (lineItems) => {
     // TODO: fill me in
