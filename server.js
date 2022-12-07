@@ -9,8 +9,15 @@ const VenueInfo = require('./models/venueInfo-model.js')
 const authRoutes = require('./auth/routes/authRoutes');
 const connection = require('./auth/config/database');
 const cookieParser = require('cookie-parser');
-const {requireAuth} = require('./auth/middleware/authMiddleware');
+const {requireAuth, checkUser} = require('./auth/middleware/authMiddleware');
 const { removeListener } = require('./auth/config/database');
+
+
+const Game = require('./auth/config/databaseGame');
+const { render } = require('ejs');
+const Join = require('./auth/config/databaseJoin');
+const ObjectId = require('mongodb').ObjectID;
+const User = require("./auth/config/database");
 
 const path = __dirname + '/views/build';
 
@@ -41,9 +48,22 @@ const bodyParser = require('body-parser');
 let items = [];
 let decodedToken = {};
 
-app.get('/', function (req,res) {
+app.get('*', checkUser)
+
+
+app.get("/user/:id", (req, res) => {
+    const id = req.params.id;
+    console.log(id)
+    Court.find({user_id: id})
+        .then(result => 
+            res.json(result))
+})
+
+// serve React when "/"
+app.get('/booking', function (req,res) {
     res.sendFile(path + "index.html");
   });
+
 
 // shoppping cart checkout 
 app.post("/create-checkout-session", requireAuth, async (req,res) => {
@@ -56,6 +76,7 @@ app.post("/create-checkout-session", requireAuth, async (req,res) => {
     if (decodedToken === undefined){
          res.json({url:"http://localhost:8080/login"})
     } else {
+        // if user is logged in
         const lineItems = items.map(item => {
             return{
                 price_data: {
@@ -87,7 +108,9 @@ app.post("/create-checkout-session", requireAuth, async (req,res) => {
 
 })
 
-app.post("/",(req,res) => {
+
+app.post("/booking", checkUser, (req,res) => {
+    console.log(req.decodedToken)
     // console.log(req.body)
     const searchCourt = req.body;
     Court.find(searchCourt)
@@ -95,7 +118,7 @@ app.post("/",(req,res) => {
             const bookedCourt = result
             // res.json(result)
 
-            VenueInfo.find({venue: searchCourt.venue})
+            VenueInfo.find({venue: searchCourt.venue, sport: searchCourt.sport})
             .then(result => {
                 const venueInfo = result
                 console.log(venueInfo)
@@ -111,6 +134,7 @@ app.post("/",(req,res) => {
 
 })
 
+
 const endpointSecret = process.env.ENDPOINT_SECRET_STRIPE 
 
 app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request, response) => {
@@ -118,16 +142,181 @@ app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request,
     // console.log(payload)
     if (payload.type === 'checkout.session.completed'){
         console.log('checkout complete')
-        console.log(items)
         items.forEach(item =>{
             item.court.user_id = decodedToken.id
-            console.log(item)
+            console.log(item.court)
             let court = new Court(item.court)
             court.save()
+                .then(result => {console.log(result)})
                 .catch(err => console.log(err))
         })
     }
     response.status(200);
   });
+
+
+// to check for user token
+app.get('/check', checkUser,(req,res) => {
+    console.log(req.decodedToken)
+    res.json(req.decodedToken)
+})
+
+// DISCOVER FEATURE
+
+app.get('/dashboard', requireAuth, (req, res, next) => {
+    const id = req.decodedToken.id;
+    Court.find({user_id: id}, (err, docs) => {
+        if(err){
+            console.log(err);
+        } else {
+
+            VenueInfo.find()
+                .then(result => {
+                    const allVenue = result;
+                    res.render('dashboard', {courts: docs, allVenue: allVenue})
+                })
+        }
+    })
+    
+})
+
+app.get('/court', (req, res, next) => {
+    res.render('court');
+})
+
+app.post('/court', requireAuth, (req, res, next) => {
+    
+    const id = req.decodedToken.id;
+    const newCourt = new Court({
+        user_id: id,
+        court: req.body.court,
+        sport: req.body.sport,
+        venue: req.body.venue,
+        date: req.body.date,
+        timestart: req.body.timeStart
+    })
+    newCourt.save();
+    res.redirect('/');
+})
+
+app.get('/createGame/:id', (req, res, next) => {
+    res.render('createGames', {courtId: req.params.id});
+})
+
+app.post('/createGame/:id', requireAuth, (req, res, next) => {
+    //user id
+    const id = req.decodedToken.id;
+    //courts id
+    const courtId= req.body.id;
+    let result = courtId.trim();
+    console.log(result);
+    
+    
+
+
+    Court.findOne({_id: ObjectId(result)}, (err,docs) => {
+        if(err){
+            console.log(err);
+        } else {
+            User.findOne({_id: ObjectId(id)}, (err, data) => {
+                if(err){
+                    console.log(err);
+                } else {
+                    const newGame = new Game({
+                        ownerId: data._id,
+                        username: data.email,
+                        eventName: req.body.eventName,
+                        description: req.body.description,
+                        sport: docs.sport,
+                        date: docs.date,
+                        timeStart: req.body.timeStart,
+                        timeEnd: req.body.timeEnd,
+                        venue: docs.venue,
+                        court: docs.court,
+                        currentPlayer: req.body.currentPlayer,
+                        playerMax: req.body.playerMax,
+                        playerIdJoin: []
+                
+                        
+                
+                    })
+                    newGame.save();
+                    res.redirect('/');
+                }
+            })
+        }
+    })
+})
+
+app.get('/discover', checkUser, (req, res, next) => {
+    if (req.user == null){
+        var user = '';
+    } else {
+        var user = req.user._id;
+    }
+    Game.find()
+        .then((result) => {
+            res.render('discover', {games: result, userId: user});
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+ })
+
+
+//the id is Game objectId
+app.get('/join/:id', requireAuth, (req, res, next) => {
+    res.render('join', {courtId: req.params.id, });
+    
+})
+
+app.post('/join/:id', requireAuth, (req, res, next) => {
+    const userId = req.decodedToken.id;
+    const courtId= req.body.id;
+    let result = courtId.trim();
+    
+    const newJoin = new Join({
+        joinName: req.body.name,
+        joinContact: req.body.contact, 
+        joinId: userId,
+        oriId: result,
+    })
+    
+    
+    
+    newJoin.save()
+    Game.findOneAndUpdate(
+        {_id: ObjectId(result)} ,
+        { $push: { playerIdJoin: userId} },
+        {useFindAndModify: false},
+        function (error, success) {
+            if (error) {
+                console.log(error);
+                console.log(courtId);
+            } else {
+                console.log(success);
+            }
+        
+        })
+    
+        Game.findOneAndUpdate(
+            {_id: ObjectId(result)} ,
+            { $inc: { currentPlayer: 1 }},
+            {useFindAndModify: false},
+            function (error, success) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(success);
+                }
+            
+            })
+    
+    
+    
+    
+        
+    res.redirect('/');
+})
 
   app.use(authRoutes);

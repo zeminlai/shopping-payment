@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+    <script src="https://kit.fontawesome.com/132be6e6e6.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+     <style> @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <!-- Header -->
+      <header>
+        <a href="#" class = "logo">CROC</a>
+        <div class="rightSide">
+          <div class="btns dayNight">
+            <ion-icon name="moon-outline"></ion-icon>
+            <ion-icon name="sunny-outline"></ion-icon>
+          </div>
+          <div class="btns menuToggle">
+            <ion-icon name="menu-outline"></ion-icon>
+            <ion-icon name="close-outline"></ion-icon>
+          </div>
+        </div>
+    </header>
+
+    <ul class="navigation">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Package</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+
+    <!--Dark mode-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+      let dayNight = document.querySelector('.dayNight')
+      let menuToggle = document.querySelector('.menuToggle')
+      let body = document.querySelector('body')
+      let navigation = document.querySelector('.navigation')
+
+
+      dayNight.onclick = function(){
+        body.classList.toggle('dark')
+        dayNight.classList.toggle('active')
+      }
+
+      menuToggle.onclick = function(){
+        menuToggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+      }
+    </script>
+
+
+  <!-- DashBoard -->
+    <section class="dashboard">
+
+      <!-- leftside -->
+        <div class="boardleft">
+          <h2>Upcomming</h2>
+          <button class="book">Court</button>
+          <button class="book">Games</button>
+        </div>
+
+        <!-- line -->
+        <div class="line"></div>
+
+        <!-- rightside -->
+          <div class="boardright">
+            <div class="court-title">
+              <h2 class="court-titleh2">Court</h2>
+            </div>
+              <!-- courtssssss -->
+              <% if (courts.length > 0) { %>
+                <% courts.forEach(court => { %>  
+    
+                    <% var timeStart = parseInt(court.toObject().timestart)  %>
+                    <% var timeEnd = timeStart + 1 %> 
+
+                    <% if (court.toObject().sport == 'badminton') { %>
+                        <% var image = "image/badminton.jpeg"; %> 
+                    <% } else  { %>
+                        <% var image = "image/basketball.jpeg"; %>
+                    <% } %> 
+
+                    <% var id = court.toObject()._id %> 
+                    
+                    <!-- <% allVenue.forEach((venue) => { %>
+                        <% if ((venue.sport == court.toObject().sport) && (venue.venue == court.toObject().venue)) {%>
+                          <% console.log("match!") %>
+                          <% var price = venue.toObject().price %>
+                          <% console.log(price) %>
+                          <% } %>
+                          <%console.log(price)%>
+                    <% }) %> -->
+                    <div class="court1">
+
+                
+                        <div class="imgBox">
+                          <div class="sport">
+                            <div class="text">
+                                <%= court.toObject().sport %>
+                            </div>
+                          </div>
+                          <img src="<%= image %>"  class="cover">
+                        </div>
+                        
+                        <div class="actionBtns">
+                          <div class="left">
+                            <div class="info-box">
+                              <i class="fa-solid fa-calendar-days"></i>
+                              <div class="info">
+                                <h2><%= court.toObject().date %></h2>
+                                <p style="font-size:12px;"><%= court.toObject().timestart %>00-<%= timeEnd %>00</p>
+                              </div>
+                            </div>
+            
+                            <div class="info-box">
+                              <i class="fa-solid fa-location-dot"></i>
+                              <div class="info">
+                                <h2><%= court.toObject().venue %></h2>
+                                <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                              </div>
+                            </div>  
+            
+                            <div class="info-box">
+                              <i class="fa-solid fa-bookmark"></i>
+                              <div class="info">
+                                <h2>Court</h2>
+                                <p style="font-size:12px;"><%= court.toObject().court %></p>
+                              </div>
+                            </div>
+            
+                            <div class="info-box">
+                              <i class="fa-solid fa-phone"></i>
+                              <div class="info">
+                                <h2>Phone</h2>
+                                <p style="font-size:12px;">+6012-3456789</p>
+                              </div>
+                            </div>
+            
+                            <div class="info-box">
+                              <i class="fa-solid fa-tags"></i>
+                              <div class="info">
+                                <h2>Pricing</h2>
+                                <p style="font-size:12px;">RM 15</p>
+                              </div>
+                            </div>                     
+                                </div>
+                          </div>
+                          <div class="share">
+                            <a href="/createGame/<%= id %> "><button type="submit" class="share-btn"><i class="fa-solid fa-share"></i></button></a>
+                          </div>
+                  </div>
+                <% }) %> 
+               
+                <% } else {%>
+                    <p>There are no games to display...</p>
+                <% } %>
+                
+              
+                  
+            </div>
+         
+        </section>
+        
+
+
+  </body>
+</html>

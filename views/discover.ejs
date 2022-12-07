@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Booking Page</title>
+    <link rel="stylesheet" href="./discover.css">
+    <script src="https://kit.fontawesome.com/132be6e6e6.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+     <style> @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <!-- Header -->
+      <header>
+        <a href="#" class = "logo">CROC</a>
+        <div class="rightSide">
+          <div class="btns dayNight">
+            <ion-icon name="moon-outline"></ion-icon>
+            <ion-icon name="sunny-outline"></ion-icon>
+          </div>
+          <div class="btns menuToggle">
+            <ion-icon name="menu-outline"></ion-icon>
+            <ion-icon name="close-outline"></ion-icon>
+          </div>
+        </div>
+    </header>
+
+    <ul class="navigation">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Package</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+
+    <!--Dark mode-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+      let dayNight = document.querySelector('.dayNight')
+      let menuToggle = document.querySelector('.menuToggle')
+      let body = document.querySelector('body')
+      let navigation = document.querySelector('.navigation')
+
+
+      dayNight.onclick = function(){
+        body.classList.toggle('dark')
+        dayNight.classList.toggle('active')
+      }
+
+      menuToggle.onclick = function(){
+        menuToggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+      }
+    </script>
+
+    <!-- Discover Whole Body 1 -->
+    <div class="discover-whole">
+
+        <!-- Discover card1 -->
+        
+        
+        <% if (games.length > 0) { %>
+            <% games.forEach(game => { %>  
+
+                <% if (game.toObject().sport == 'badminton') { %>
+                    <% var image = "image/badminton.jpeg"; %> 
+                <% } else  { %>
+                    <% var image = "image/basketball.jpeg"; %>
+                <% } %> 
+                
+                <% var id = game.toObject()._id %> 
+                <% var date = (game.toObject().date) %> 
+                <% var newDate =  new Date(date)%> 
+                <% var array = game.toObject().playerIdJoin %>
+        <% if (array.includes(userId.toString()) && game.toObject().currentPlayer != game.toObject().playerMax) {%> 
+          <% var button = 'JOINED' %> 
+          <% var href = '' %> 
+        <% } else if ( game.toObject().currentPlayer == game.toObject().playerMax) {%> 
+          <% var button = 'FULLED' %> 
+          <% var href = '' %> 
+        <% } else { %>
+          <% var button = 'JOIN' %> 
+          <% var href = '/join/' + id %>
+        <% } %> 
+         
+                
+                <div class="body">
+                    <div class="card">
+                      <div class="top">
+                        <div class="userDetail">
+                            <div class="profile_img">
+                              <i class="fa-solid fa-circle-user"></i>
+                            </div>
+                            <h3><%= game.toObject().username %> <br><span>Let's Play Together!</span></h3>
+                        </div>
+                            <div><i class="fa-solid fa-ellipsis-vertical" id="dot"></i></div>
+                      </div>
+                      <div class="imgBox">
+                        <div class="sport">
+                          <div class="text">
+                            <%= game.toObject().sport %> 
+                          </div>
+                        </div>
+                        <img src= "<%= image %>"    class="cover">
+                      </div>
+                      
+                      <div class="actionBtns">
+                        <div class="left">
+                            <div class="info-box">
+                              <i class="fa-solid fa-calendar-days"></i>
+                              <div class="info">
+                                <h2><%= newDate %></h2>
+                                <p style="font-size:12px;"><%= game.toObject().timeStart %>00 - <%= game.toObject().timeEnd %>00</p>
+                              </div>
+                            </div>
+                
+                            <div class="info-box">
+                              <i class="fa-solid fa-location-dot"></i>
+                              <div class="info">
+                                <h2><%= game.toObject().venue %></h2>
+                                <p style="font-size:12px;"> Court <%= game.toObject().court %></p>
+                              </div>
+                            </div>
+                            
+                            <div class="info-box">
+                              <i class="fa-solid fa-users" style="font-size:12px;"></i>
+                              <div class="info">
+                                <h2>Players : <%= game.toObject().currentPlayer %> / <%= game.toObject().playerMax %></h2>
+                              </div>
+                            </div>
+                
+                            <div class="join-detail-btn">
+                              <div class="btn-background"><button class="join">INFO</button></div>
+                              <div class="btn-background"><a href="<%= href %>  "><button class="join"><%= button %> </button></a></div>
+                              </div>
+                
+                        </div>  
+                        
+                            
+                      </div>
+                    </div>
+                  </div>
+            <% }) %> 
+           
+            <% } else {%>
+                <p>There are no games to display...</p>
+            <% } %>
+        
+        
+
+        
+            
+        
+        
+
+
+
+</div>
+
+
+
+
+</body>
+</html>
