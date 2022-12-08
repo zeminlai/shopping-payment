@@ -1,0 +1,263 @@
+.main{
+  position:relative;
+  width:100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+
+.main video
+{
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.mask
+{
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height: 100%;
+  z-index: 2;
+  user-select: none;
+  mix-blend-mode:screen;
+  border: none;
+
+}
+
+.dark .mask
+{
+  filter:invert(1.0);
+  mix-blend-mode:multiply;
+}
+.main h2
+{
+  position: relative;
+  text-align: center;
+  z-index: 3;
+  font-size: 80px;
+  color:#fff;
+  
+}
+
+.main h2:hover{
+background: var(--rainbow);
+background-size: 500%;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: animate 20s linear infinite;
+}
+ /* Booking */
+ .book-body
+ {
+   min-height: 50vh;
+   display:flex;
+   justify-content: center;
+   align-items: top;
+   background: var(--white);
+ }
+
+ .book-background
+ {
+   position: relative;
+   border-radius:15px;
+   margin-top:60px;
+   --border-size: 0px;
+   --border-angle: 0turn;
+   width:1010px;
+   height:210px;
+   background:
+               conic-gradient(from var(--border-angle), #4158D0 , #C850C0 , #FFCC70 , #fdffaf,#FFCC70,#C850C0,#4158D0);
+             background-size: calc(100% - (var(--border-size) * 2))
+                 calc(100% - (var(--border-size) * 2)),
+               cover;
+             background-position: center;
+             background-repeat: no-repeat;
+   
+             animation: bg-spin 3s linear infinite;
+ }
+ .book-container
+ { 
+   position: absolute;
+   inset:5px 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width:1000px;
+   height:200px;
+   background: #fff;
+   box-shadow: 18px 18px 70px rgba(0,0,0,0.15);
+   padding:20px;
+   border-radius:15px;
+ }
+
+ .book-body .word
+ {
+   position:absolute;
+   bottom:113%;
+ }
+
+ .book-body .book-title
+ {
+   font-size: 28px;
+ }
+
+ .bcolumn
+ {
+   position:relative;
+   display: flex;
+   flex-direction: column;
+ }
+
+ .brow
+ {
+   display:flex;
+   flex-direction: row;
+   gap:30px;
+   justify-content: center;
+   align-items: center;
+   margin-left:3px;
+   margin-right:3px;
+ }
+
+ .brow .venue
+ {
+   
+   display: flex;
+   flex-direction: column;
+   background: #fff;
+ }
+
+ .book-title:hover,
+ .form-label:hover
+ {
+   background: var(--rainbow);
+   background-size: 500%;
+   animation: animate 20s linear infinite;
+   -webkit-background-clip:text;
+   -webkit-text-fill-color: transparent;
+ }
+ 
+ .book-title-below-line
+ {
+  position: absolute;
+  height:2px;
+  width:148px;
+  margin-left:2px;
+  bottom:113%;
+  background: linear-gradient(90deg,#4158D0, #4158D0 , #C850C0 , #FFCC70 , #fdffaf,#FFCC70,#C850C0,#4158D0,#4158D0);
+      background-size: 500%;
+      animation: animate 20s linear infinite;
+ }
+
+ .brow .select
+ {
+  border:solid;
+  border-width:1px;
+  border-color:#e3e4e0;
+   border-width:1px;
+   width:155px;
+   height:40px;
+   border-radius: 6px;
+ }
+
+ .brow .select:hover
+ {
+   border:solid;
+   border-width:1px;
+   border-color:#e3e4e0;
+   background: var(--rainbow);
+   background-size: 500%;
+   animation: animate 20s linear infinite;
+   -webkit-background-clip:text;
+   -webkit-text-fill-color: transparent;
+ }
+
+ .brow .form-control
+ {
+  border:solid;
+  border-width:1px;
+  border-color:#e3e4e0;
+   border-width:1px;
+   width:155px;
+   height:40px;
+   border-radius: 6px;
+ }
+
+ .brow .form-control:hover
+ {
+   border:solid;
+   border-width:1px;
+   border-color:#e3e4e0;
+   background: var(--rainbow);
+   background-size: 500%;
+   animation: animate 20s linear infinite;
+   -webkit-background-clip:text;
+   -webkit-text-fill-color: transparent;
+ }
+
+ .brow .book-sport
+ {
+   display: flex;
+   flex-direction: column;
+   background: #fff;
+ }
+
+
+ .brow .date
+ {
+   display: flex;
+   flex-direction: column;
+ }
+
+
+ .brow .time
+ {
+   display: flex;
+   flex-direction: column;
+ }
+
+
+ .brow .hour
+ {
+   display: flex;
+   flex-direction: column;
+ }
+
+.book-find
+ {
+   position: relative;
+   display: flex;
+   justify-content: right;
+   align-items: right;
+ }
+
+.find-btn
+ {
+   position: absolute;
+   margin-top:1.5%;
+   margin-right:0.5%;
+   border:none;
+   background: transparent;
+   font-size:35px;
+   cursor: pointer;
+ }
+
+ .find-btn:hover
+ {
+   background: var(--rainbow);
+   background-size: 500%;
+   animation: animate 20s linear infinite;
+   -webkit-background-clip:text;
+   -webkit-text-fill-color: transparent;
+ }
+

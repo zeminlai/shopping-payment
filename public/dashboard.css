@@ -49,7 +49,7 @@ header .logo
   font-family: Arial, Helvetica, sans-serif;
 }
 
-header .logo:hover
+/* header .logo:hover
 {
   position: relative;
   display:inline-flex;
@@ -64,9 +64,9 @@ header .logo:hover
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: animate 20s linear infinite;
-}
+} */
 
-.rightSide
+/* .rightSide
 {
   display: flex;
   
@@ -108,10 +108,10 @@ header .logo:hover
 .btns.active ion-icon:nth-child(1)
 {
   display: none;
-}
+} */
 
 
-.navigation
+/* .navigation
 {
   position: absolute;
   top:0;
@@ -152,7 +152,7 @@ header .logo:hover
 {
   background: var(--black);
   color: var(--white);
-}
+} */
 
 .dashboard
 {

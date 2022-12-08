@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+
+    <%- include("./partials/nav.ejs") %>
+
+
+  <!-- DashBoard -->
+    <section class="dashboard">
+
+      <!-- leftside -->
+        <div class="boardleft">
+          <h2>Upcoming</h2>
+          <a href="/dashboard"><button class="book">Court</button></a>
+          <a href="/game"><button class="book">Games</button></a>
+        </div>
+
+        <!-- line -->
+        <div class="line"></div>
+
+        <!-- rightside -->
+          <div class="boardright">
+            <div class="court-title">
+              <h2 class="court-titleh2">Games joined</h2>
+            </div>
+              <!-- courtssssss -->
+              <% if (courts.length > 0) { %>
+                <% courts.forEach(court => { %>  
+                    <% var timeStart = parseInt(court.toObject().timeStart)  %>
+                    <% var timeEnd = timeStart + 1 %> 
+
+                    <% if (court.toObject().sport == 'badminton') { %>
+                        <% var image = "image/badminton.jpeg"; %> 
+                    <% } else  { %>
+                        <% var image = "image/basketball.jpeg"; %>
+                    <% } %> 
+
+                    <% var id = court.toObject()._id %> 
+                    
+                    <div class="court1">
+
+                
+                        <div class="imgBox">
+                          <div class="sport">
+                            <div class="text">
+                                <%= court.toObject().sport %>
+                            </div>
+                          </div>
+                          <img src="<%= image %>"  class="cover">
+                        </div>
+                        
+                        <div class="actionBtns">
+                          <div class="left">
+                            <div class="info-box">
+                              <i class="fa-solid fa-calendar-days"></i>
+                              <div class="info">
+                                <h2><%= court.toObject().date %></h2>
+                                <p style="font-size:12px;"><%= court.toObject().timeStart %>00-<%= timeEnd %>00</p>
+                              </div>
+                            </div>
+            
+                            <div class="info-box">
+                              <i class="fa-solid fa-location-dot"></i>
+                              <div class="info">
+                                <h2><%= court.toObject().venue %></h2>
+                                <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                              </div>
+                            </div>  
+            
+                            <div class="info-box">
+                              <i class="fa-solid fa-bookmark"></i>
+                              <div class="info">
+                                <h2>Court</h2>
+                                <p style="font-size:12px;"><%= court.toObject().court %></p>
+                              </div>
+                            </div>
+            
+                            <div class="info-box">
+                              <i class="fa-solid fa-phone"></i>
+                              <div class="info">
+                                <h2>Phone</h2>
+                                <p style="font-size:12px;">+6012-3456789</p>
+                              </div>
+                            </div>
+            
+                            <div class="info-box">
+                              <i class="fa-solid fa-tags"></i>
+                              <div class="info">
+                                <h2>Pricing</h2>
+                                <p style="font-size:12px;">RM40</p>
+                              </div>
+                            </div>                     
+                                </div>
+                          </div>
+                          
+                  </div>
+                <% }) %> 
+               
+                <% } else {%>
+                    <p>You haven't join any game yet</p>
+                <% } %>
+            </div>
+         
+        </section>
+
+
+
+  </body>
+</html>

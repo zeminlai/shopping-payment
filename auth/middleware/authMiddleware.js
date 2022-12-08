@@ -9,7 +9,7 @@ const requireAuth = (req, res, next) => {
     jwt.verify(token, 'secret', (err, decodedToken) => {
       if (err) {
         console.log(err.message);
-        res.redirect('/login');
+        req.decodedToken = null;
       } else {
         req.decodedToken = decodedToken
         next();
@@ -17,6 +17,7 @@ const requireAuth = (req, res, next) => {
     });
   } else {
     console.log("not yet login")
+    req.decodedToken = null;
     next()
   }
 };

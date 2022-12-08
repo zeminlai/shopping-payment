@@ -1,0 +1,60 @@
+
+.night{
+  height:80vh;
+  width:100%;
+  background:url(./image/Img_1.png);
+  background-size: cover;
+  position: relative;
+  overflow-x:hidden;
+}
+
+.surface{
+  height:140px;
+  width:600%;
+  background:url(./image/Img_02.png);
+  display:block;
+  position:absolute;
+  bottom:0;
+  left:0;
+  background-repeat: repeat-x;
+  animation: moveRight 6s linear infinite;
+}
+
+.basketball{
+  position: absolute;
+  bottom:18%;
+  left:24%;
+  animation: suspension 0.67s  infinite;
+}
+
+.imgbasketball{
+  width:100px;
+  height:auto;
+  animation: rotation 2s infinite linear;
+}
+
+/* Animation */
+@keyframes moveRight{
+  100%{transform:translateX(-2950px)}
+}
+
+@keyframes suspension{
+  100%{
+    transform: translateY(90px);
+  }
+  50%{
+    transform: translateY(-90px);
+  }
+  0%{
+    transform: translateY(90px);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

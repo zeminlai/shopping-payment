@@ -22,6 +22,7 @@ const GameSchema = new mongoose.Schema({
     court: String,
     currentPlayer: Number,
     playerMax: Number,
+    courtId: String,
     playerIdJoin: Array
 })
 

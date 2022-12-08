@@ -287,7 +287,8 @@ section .row:nth-child(even) div:nth-child(2)
 
 /* Some Decoration */
 
-.login .inputBox input#btn
+.login .inputBox input#btn,
+.login .inputBox a#btn
 {
   border:none;
   border-radius:4px;

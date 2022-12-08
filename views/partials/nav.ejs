@@ -1,0 +1,139 @@
+<header id="home-page">
+    <a href="/home" class = "logo">CROC</a>
+    <div class="rightSide">
+  
+      
+  
+      <!-- audio -->
+      <audio id="audio" src="music.mp3" autoplay loop type ="audio/mpeg" >
+      </audio>
+      <div class="btns musicPlay">
+        <span id="playPauseBTN"  onclick="playPause()"><i class="fa-solid fa-headphones"></i></span>
+      </div>
+  
+      <!-- dark-mode -->
+      <div class="btns dayNight">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+      </div>
+
+      <% console.log(decodedToken) %>
+      <% if (decodedToken == null) { %>
+      <!-- user -->
+      <div class="btns">
+        <a href="/login">
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </a>
+      </div>
+      <% } else {%>
+        <div class="btns">
+          <a href="/dashboard">
+            <i class="fa-solid fa-circle-user"></i>
+          </a>
+        </div>
+        <% } %>
+        <!-- slidebar -->
+      <div class="btns menuToggle">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+      
+    </div>
+  </header>
+  
+  
+         <!-- Navigation -->
+         <div class="navigation">
+          <ul>
+            <li class="list active">
+              <a href="/home">
+                <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+                <span class="nav-title">Home</span>
+              </a>
+            </li>
+    
+            <li class="list">
+              <a href="/#/booking">
+                <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
+                <span class="nav-title">Book</span>
+              </a>
+            </li>
+    
+            <li class="list">
+              <a href="/discover">
+                <span class="nav-icon"><i class="fa-solid fa-earth-americas"></i></span>
+                <span class="nav-title">Discover</span>
+              </a>
+            </li>
+    
+            <li class="list">
+              <a href="/home#category-page">
+                <span class="nav-icon"><i class="fa-solid fa-basketball"></i></span>
+                <span class="nav-title">Category</span>
+              </a>
+            </li>
+    
+            <li class="list">
+              <a href="/dashboard">
+                <span class="nav-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                <span class="nav-title">Upcomming</span>
+              </a>
+            </li>
+            <% if (decodedToken != null) {%>
+              <li class="list">
+                <a href="/logout">
+                  <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                  <span class="nav-title">Logout</span>
+                </a>
+              </li>
+              <% }else {%>
+                <li class="list">
+                  <a href="/login">
+                    <span class="nav-icon"><i class="fa-solid fa-right-to-bracket"></i></span>
+                    <span class="nav-title">Login</span>
+                  </a>
+                </li>
+                <% } %>
+            <div class="indicator"></div>
+          </ul>
+        </div>  
+    
+      
+  
+      <!--Dark mode-->
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <script>
+        let dayNight = document.querySelector('.dayNight')
+        let menuToggle = document.querySelector('.menuToggle')
+        let body = document.querySelector('body')
+        let navigation = document.querySelector('.navigation')
+  
+  
+        dayNight.onclick = function(){
+          body.classList.toggle('dark')
+          dayNight.classList.toggle('active')
+        }
+  
+        menuToggle.onclick = function(){
+          menuToggle.classList.toggle('active')
+          navigation.classList.toggle('active')
+        }
+        var audio = document.getElementById('audio');
+        var playPauseBTN = document.getElementById('playPauseBTN');
+        var count = 0;
+        document.getElementById("audio").volume = 0.1;
+        function playPause(){
+          
+          if(count == 0){
+            count=1;
+            audio.play();
+            playPauseBTN.innerHTML  = '<i class="fa-solid fa-headphones"></i>';
+          }
+          else{
+            count = 0;
+            audio.pause();
+            playPauseBTN.innerHTML = '<i class="fa-solid fa-bell-slash"></i>';
+          }
+        }
+      </script>
