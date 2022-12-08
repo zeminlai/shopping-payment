@@ -182,7 +182,6 @@ app.get('/dashboard', requireAuth, (req, res, next) => {
     let userEmail = '';
     User.findOne({_id: id})
         .then(user => {
-            console.log(user);
             userEmail = user.email;
         })
     Court.find({user_id: id}, (err, docs) => {
