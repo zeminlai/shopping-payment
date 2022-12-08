@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria&display=swap');
+
+.discover
+{
+  position: relative;
+  width: 100%;
+  min-height:110vh;
+  display: flex;
+  flex-direction: column;
+  padding:20px;
+  padding-left: 150px;
+  padding-right: 150px;
+  background: var(--white);
+}
+
+body
+{
+  position: relative;
+}
+.title
+{
+  display:block;
+  position: relative;
+  border:1cm;
+  border-radius: 10px;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.title-w
+{
+  width:500px;
+  font-size:45px;
+  color:var(--black);
+}
+
+.title-w:hover
+{
+  background: var(--rainbow);
+  background-size: 500%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate 20s linear infinite;
+
+}
+
+.title-below-line
+{
+  width:405px;
+  height:2px;
+  margin-left: 23px;
+  background: linear-gradient(90deg,#4158D0, #4158D0 , #C850C0 , #FFCC70 , #fdffaf,#FFCC70,#C850C0,#4158D0,#4158D0);
+      background-size: 500%;
+      animation: animate 20s linear infinite;
+}
+
+.swiper{
+  width: 100%;
+  height: 75%;
+  margin-top: 20px;
+}
+
+.swiper-slide {
+
+  font-size: 18px;
+  background: var(--white);
+  border-style: none;
+  border-radius: 8px;
+  border-width:1px;
+  
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  
+}
+
+.swiper-slide{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}
+
+.swiper-slide h2,
+.swiper-slide p
+{
+  font-family: 'Alexandria', sans-serif;
+}
+
+
+.body
+{
+  min-height: 80vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+  font-family: 'Alexandria', sans-serif;
+}
+
+
+.card
+{
+  position: relative;
+  width:360px;
+  min-height:400px;
+  background: #fff;
+  border-style: solid;
+  border-width: 3px;
+  border-color:rgba(0,0,0,0.05);
+  padding:20px;
+  border-radius:15px;
+}
+
+.card .top
+{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card .top .userDetail
+{
+  display: flex;
+  align-items: center;
+}
+
+.card .top .userDetail .profile_img
+{
+  position: relative;
+  width:42px;
+  height:42px;
+  border-radius: 50%;
+  overflow:hidden;
+  margin-right: 8px;
+  background: linear-gradient(45deg, #4158D0 0%, #C850C0 31%, #FFCC70 77%, #fdffaf 100%);
+  
+}
+
+.card .top .userDetail .profile_img:hover
+{
+  position: relative;
+  width:42px;
+  height:42px;
+  border-radius: 50%;
+  overflow:hidden;
+  margin-right: 8px;
+  background: var(--rainbow);
+  background-size: 500%;
+  animation: animate 20s linear infinite;
+}
+
+
+.card .top .userDetail .profile_img i
+{
+  width:85%;
+  height:85%;
+  object-fit: cover;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  inset: 21px;
+  color:#fff;
+}
+.cover
+{
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card .top .userDetail h3
+{
+  font-size:16px;
+  color:#4d4d4f;
+  font-weight: 500;
+  line-height:1em;
+  font-family: 'Alexandria', sans-serif;
+
+}
+
+.card .top .userDetail h3 span
+{
+  font-size: 0.7em;
+  font-family: 'Alexandria', sans-serif;
+}
+
+.userDetail i
+{
+  transform:scale(2);
+  cursor:pointer;
+}
+
+.imgBox
+{
+  position: relative;
+  width:100%;
+  height:320px;
+  margin:10px 0 15px;
+  z-index: 0;
+}
+
+.imgbox img{
+  border-radius: 10px;
+}
+
+.sport{
+  width:100%; 
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  min-height: 320px;
+}
+
+
+.sport .text{
+  width:100%; 
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  color:#fff;
+  font-size:60px;
+}
+
+.sport .text:hover{
+  width:100%; 
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  background: var(--rainbow);
+  font-size:60px;
+  background-size: 500%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate 20s linear infinite;
+
+}
+
+.actionBtns
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+}
+
+.actionBtns .left
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  flex-direction: column;
+  gap:20px;
+}
+
+.info-box
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width:100%;
+}
+
+.info h2
+{
+  font-size:14px;
+}
+
+
+.actionBtns i
+{
+  max-width: 40px;
+  cursor:pointer;
+  margin-right:3px;
+  font-size: 140%;
+}
+
+.actionBtns i:hover
+{
+  background: var(--rainbow);
+  background-size: 500%;
+  animation: animate 20s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.actionBtns .left i
+{
+  margin-right:8px;
+  margin-left:2px;
+}
+
+.join-detail-btn
+{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap:80px;
+  width:320px;
+  margin-top:10px;
+}
+
+.btn-background
+    {
+      position: relative;
+      border-radius:5px;
+      width:85px;
+       height:45px;
+      --border-size: 0px;
+      --border-angle: 0turn;
+      background:
+                  conic-gradient(from var(--border-angle), #4158D0 , #C850C0 , #FFCC70 , #fdffaf,#FFCC70,#C850C0,#4158D0);
+                background-size: calc(100% - (var(--border-size) * 2))
+                    calc(100% - (var(--border-size) * 2)),
+                  cover;
+                background-position: center;
+                background-repeat: no-repeat;
+      
+                animation: bg-spin 3s linear infinite;
+    }
+
+
+.join
+{
+  inset:2.5px;
+  position: absolute;
+  width:80px;
+  height:40px;
+  font-family: 'Oswald', sans-serif;
+  border-style:none;
+  border-radius: 5px;
+  background:#fff;
+  cursor: pointer;
+  font-size: 25px;
+  color: #fff;
+    text-shadow: #555 0px 0px 3px;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+
+@keyframes animate
+{
+  0%
+  {
+    background-position: 0 ;
+  }
+
+  100%{
+    background-position: 500%   ;
+  }
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+

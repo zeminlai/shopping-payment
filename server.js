@@ -19,7 +19,7 @@ const Join = require('./auth/config/databaseJoin');
 const ObjectId = require('mongodb').ObjectID;
 const User = require("./auth/config/database");
 
-const path = __dirname + '/views/build';
+const path = __dirname + '/views/build/';
 
 let cors = require('cors');
 
@@ -39,6 +39,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use("/video", express.static(__dirname + "/video"))
 
 app.set('view engine', 'ejs');
 
@@ -50,6 +51,15 @@ let decodedToken = {};
 
 app.get('*', checkUser)
 
+// app.get("/home", (req, res) => {
+//     res.sendFile(__dirname + "/views/index2.html");
+
+// })
+
+app.get("/home",(req, res) => {
+    console.log(req.decodedToken)
+    res.render("home", {decodedToken: req.decodedToken})
+})
 
 app.get("/user/:id", (req, res) => {
     const id = req.params.id;
@@ -67,13 +77,14 @@ app.get('/booking', function (req,res) {
 
 // shoppping cart checkout 
 app.post("/create-checkout-session", requireAuth, async (req,res) => {
+
     console.log("fetch successful")
     // console.log(req.body.items)
     items = req.body.items;
     console.log(req.decodedToken)
     decodedToken = req.decodedToken
 
-    if (decodedToken === undefined){
+    if (decodedToken === null){
          res.json({url:"http://localhost:8080/login"})
     } else {
         // if user is logged in
@@ -157,14 +168,23 @@ app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request,
 
 // to check for user token
 app.get('/check', checkUser,(req,res) => {
-    console.log(req.decodedToken)
+    // console.log(req.decodedToken)
     res.json(req.decodedToken)
 })
 
 // DISCOVER FEATURE
 
 app.get('/dashboard', requireAuth, (req, res, next) => {
+    if (req.decodedToken == null){
+        res.redirect("/login")
+    }
     const id = req.decodedToken.id;
+    let userEmail = '';
+    User.findOne({_id: id})
+        .then(user => {
+            console.log(user);
+            userEmail = user.email;
+        })
     Court.find({user_id: id}, (err, docs) => {
         if(err){
             console.log(err);
@@ -173,31 +193,14 @@ app.get('/dashboard', requireAuth, (req, res, next) => {
             VenueInfo.find()
                 .then(result => {
                     const allVenue = result;
-                    res.render('dashboard', {courts: docs, allVenue: allVenue})
+                    res.render('dashboard', {courts: docs, allVenue: allVenue, decodedToken: req.decodedToken, userEmail: userEmail})
                 })
         }
     })
     
 })
 
-app.get('/court', (req, res, next) => {
-    res.render('court');
-})
 
-app.post('/court', requireAuth, (req, res, next) => {
-    
-    const id = req.decodedToken.id;
-    const newCourt = new Court({
-        user_id: id,
-        court: req.body.court,
-        sport: req.body.sport,
-        venue: req.body.venue,
-        date: req.body.date,
-        timestart: req.body.timeStart
-    })
-    newCourt.save();
-    res.redirect('/');
-})
 
 app.get('/createGame/:id', (req, res, next) => {
     res.render('createGames', {courtId: req.params.id});
@@ -211,9 +214,6 @@ app.post('/createGame/:id', requireAuth, (req, res, next) => {
     let result = courtId.trim();
     console.log(result);
     
-    
-
-
     Court.findOne({_id: ObjectId(result)}, (err,docs) => {
         if(err){
             console.log(err);
@@ -235,16 +235,26 @@ app.post('/createGame/:id', requireAuth, (req, res, next) => {
                         court: docs.court,
                         currentPlayer: req.body.currentPlayer,
                         playerMax: req.body.playerMax,
+                        courtId: result,
                         playerIdJoin: []
-                
-                        
-                
                     })
                     newGame.save();
                     res.redirect('/');
                 }
             })
+            
         }
+    })
+       //to update the court so that we know is shared
+       Court.findOneAndUpdate(
+        {_id: ObjectId(result)},
+        {share: true},
+        (err, docs) => {
+            if(err){
+                console.log(err);
+            } else {
+                console.log(docs);
+            }
     })
 })
 
@@ -256,7 +266,7 @@ app.get('/discover', checkUser, (req, res, next) => {
     }
     Game.find()
         .then((result) => {
-            res.render('discover', {games: result, userId: user});
+            res.render('discover', {games: result, userId: user,decodedToken: req.decodedToken});
         })
         .catch((err) => {
             console.log(err);
@@ -266,6 +276,9 @@ app.get('/discover', checkUser, (req, res, next) => {
 
 //the id is Game objectId
 app.get('/join/:id', requireAuth, (req, res, next) => {
+    if (req.decodedToken == null){
+        res.redirect("/login")
+    }
     res.render('join', {courtId: req.params.id, });
     
 })
@@ -281,9 +294,7 @@ app.post('/join/:id', requireAuth, (req, res, next) => {
         joinId: userId,
         oriId: result,
     })
-    
-    
-    
+
     newJoin.save()
     Game.findOneAndUpdate(
         {_id: ObjectId(result)} ,
@@ -311,12 +322,63 @@ app.post('/join/:id', requireAuth, (req, res, next) => {
                 }
             
             })
-    
-    
-    
-    
-        
+
     res.redirect('/');
 })
 
+app.get('/game', requireAuth,(req, res) => {
+    if (req.decodedToken == null){
+        res.redirect("/login")
+    }
+    const id = req.decodedToken.id;
+    Game.find({playerIdJoin: id}, (err, docs) => {
+        if(err){
+            console.log(err);
+        } else {
+            res.render('game', {courts: docs,decodedToken: req.decodedToken})
+        }
+    })
+})
+
+app.get('/court', (req, res, next) => {
+    if (req.decodedToken == null){
+        res.redirect("/login")
+    }
+    res.render('court',{decodedToken: req.decodedToken});
+})
+
+app.post('/court', requireAuth, (req, res, next) => {
+
+    const id = req.decodedToken.id;
+    const newCourt = new Court({
+        user_id: id,
+        court: req.body.court,
+        sport: req.body.sport,
+        venue: req.body.venue,
+        date: req.body.date,
+        timestart: req.body.timeStart
+    })
+    newCourt.save();
+    res.redirect('/');
+})
+
+app.get('/detail/:id', (req, res, next) => {
+    const courtId= req.params.id;
+    console.log(courtId);
+    Game.findOne({courtId: courtId}, (err, data) => {
+        if(err) {
+            console.log(err);
+        } else {
+            Join.find({oriId: data._id}, (err, data) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(data);
+                    res.render('detail');
+                }
+            }
+        )}
+    })
+
+})
   app.use(authRoutes);

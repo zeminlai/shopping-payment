@@ -1,81 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="./dashboard.css">
-    <script src="https://kit.fontawesome.com/132be6e6e6.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
-     <style> @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-  </head>
 
+<%- include("./partials/head.ejs") %>
   <body>
 
-    <!-- Header -->
-      <header>
-        <a href="#" class = "logo">CROC</a>
-        <div class="rightSide">
-          <div class="btns dayNight">
-            <ion-icon name="moon-outline"></ion-icon>
-            <ion-icon name="sunny-outline"></ion-icon>
-          </div>
-          <div class="btns menuToggle">
-            <ion-icon name="menu-outline"></ion-icon>
-            <ion-icon name="close-outline"></ion-icon>
-          </div>
-        </div>
-    </header>
-
-    <ul class="navigation">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Package</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-
-    <!--Dark mode-->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script>
-      let dayNight = document.querySelector('.dayNight')
-      let menuToggle = document.querySelector('.menuToggle')
-      let body = document.querySelector('body')
-      let navigation = document.querySelector('.navigation')
-
-
-      dayNight.onclick = function(){
-        body.classList.toggle('dark')
-        dayNight.classList.toggle('active')
-      }
-
-      menuToggle.onclick = function(){
-        menuToggle.classList.toggle('active')
-        navigation.classList.toggle('active')
-      }
-    </script>
-
+<%- include("./partials/nav.ejs") %>
 
   <!-- DashBoard -->
     <section class="dashboard">
 
       <!-- leftside -->
         <div class="boardleft">
-          <h2>Upcomming</h2>
-          <button class="book">Court</button>
-          <button class="book">Games</button>
+          <h2>Upcoming</h2>
+          <a href="/dashboard"><button class="book">Court</button></a>
+          <a href="/game"><button class="book">Games</button></a>
         </div>
 
         <!-- line -->
         <div class="line"></div>
-
+        
         <!-- rightside -->
-          <div class="boardright">
+        <div class="boardright">
+            <p>Welcome back, <%= userEmail %></p>
             <div class="court-title">
               <h2 class="court-titleh2">Court</h2>
             </div>
               <!-- courtssssss -->
+              <% var price = 0;%>
               <% if (courts.length > 0) { %>
                 <% courts.forEach(court => { %>  
     
@@ -84,20 +35,30 @@
 
                     <% if (court.toObject().sport == 'badminton') { %>
                         <% var image = "image/badminton.jpeg"; %> 
-                    <% } else  { %>
+                    <% } else if(court.toObject().sport == 'basketball') { %>
                         <% var image = "image/basketball.jpeg"; %>
-                    <% } %> 
+                    <% } else if(court.toObject().sport == 'futsal') { %>
+                      <% var image = "image/football.jpg"; %>
+                  <% } %> 
 
                     <% var id = court.toObject()._id %> 
                     
-                    <!-- <% allVenue.forEach((venue) => { %>
+                    <% if (court.toObject().share == true) { %>
+                      <% var href = "/detail/" + id %> 
+                  <% } else  { %>
+                      <% var href = '/createGame/' + id%>
+                  <% } %> 
+
+                    <% let sameVenueCourt = allVenue.some(venue => (venue.sport == court.toObject().sport) && (venue.venue == court.toObject().venue))%>
+
+                    <!-- Check for court price -->
+                    <% allVenue.every((venue) => { %>
                         <% if ((venue.sport == court.toObject().sport) && (venue.venue == court.toObject().venue)) {%>
-                          <% console.log("match!") %>
-                          <% var price = venue.toObject().price %>
-                          <% console.log(price) %>
+                          <% price = venue.toObject().price %>
+                          <% return false;%>
                           <% } %>
-                          <%console.log(price)%>
-                    <% }) %> -->
+                          <% return true%>
+                    <% }) %>
                     <div class="court1">
 
                 
@@ -148,13 +109,13 @@
                               <i class="fa-solid fa-tags"></i>
                               <div class="info">
                                 <h2>Pricing</h2>
-                                <p style="font-size:12px;">RM 15</p>
+                                <p style="font-size:12px;">RM <%= price %></p>
                               </div>
                             </div>                     
                                 </div>
                           </div>
                           <div class="share">
-                            <a href="/createGame/<%= id %> "><button type="submit" class="share-btn"><i class="fa-solid fa-share"></i></button></a>
+                            <a href="<%= href %> "><button type="submit" class="share-btn"><i class="fa-solid fa-share"></i></button></a>
                           </div>
                   </div>
                 <% }) %> 

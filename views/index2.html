@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- title -->
+    <title>Playlah</title>
+
+    <!-- NavBar -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <script src="https://kit.fontawesome.com/1fb4a11a0f.js" crossorigin="anonymous"></script>
+
+    <!-- Link -->
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="category.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+
+     <!-- basketballAnimation -->
+     <link rel="stylesheet" href="basketball.css">
+    
+
+     <!-- Font link -->
+     <script src="https://kit.fontawesome.com/132be6e6e6.js" crossorigin="anonymous"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria&display=swap" rel="stylesheet">
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+     <style> @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+     <style> @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap'); </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="home-page">
+        <a href="#" class = "logo">CROC</a>
+        <div class="rightSide">
+          <audio id="audio" src="music.mp3" autoplay loop type ="audio/mpeg" >
+          </audio>
+          <div class="btns musicPlay">
+            <span id="playPauseBTN"  onclick="playPause()"><i class="fa-solid fa-headphones"></i></span>
+          </div>
+          <div class="btns dayNight">
+            <i class="fa-solid fa-moon"></i>
+            <i class="fa-solid fa-sun"></i>
+          </div>
+          <div class="btns menuToggle">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+          
+        </div>
+    </header>
+
+    <!-- Advertisement -->
+    <section class="main">
+        <video src="video/advideo.mp4" autoplay loop muted type="mp4"></video>
+        <img src="image/mask.jpg" class="mask">
+      <div class="main-text">
+        <h2>BOOK COURT</h2>
+      </div>
+
+    </section>
+    
+    <!-- Navigation -->
+    <div class="navigation">
+      <ul>
+        <li class="list active">
+          <a href="#home-page">
+            <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+            <span class="nav-title">Home</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="#book-page">
+            <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
+            <span class="nav-title">Book</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="#discover-page">
+            <span class="nav-icon"><i class="fa-solid fa-earth-americas"></i></span>
+            <span class="nav-title">Discover</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="#category-page">
+            <span class="nav-icon"><i class="fa-solid fa-basketball"></i></span>
+            <span class="nav-title">Category</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="#upcomming-page">
+            <span class="nav-icon"><i class="fa-solid fa-calendar-days"></i></span>
+            <span class="nav-title">Upcomming</span>
+          </a>
+        </li>
+        <div class="indicator"></div>
+      </ul>
+    </div>  
+
+
+    
+    <!--Dark mode-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+      let dayNight = document.querySelector('.dayNight')
+      let menuToggle = document.querySelector('.menuToggle')
+      let body = document.querySelector('body')
+      let navigation = document.querySelector('.navigation')
+      
+      dayNight.onclick = function(){
+        body.classList.toggle('dark')
+        dayNight.classList.toggle('active')
+      }
+
+      menuToggle.onclick = function(){
+        menuToggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+      }
+
+      var audio = document.getElementById('audio');
+      var playPauseBTN = document.getElementById('playPauseBTN');
+      var count = 0;
+      document.getElementById("audio").volume = 0.1;
+      function playPause(){
+        
+        if(count == 0){
+          count=1;
+          audio.play();
+          playPauseBTN.innerHTML = '<i class="fa-solid fa-headphones"></i>';
+        }
+        else{
+          count = 0;
+          audio.pause();
+          playPauseBTN.innerHTML = '<i class="fa-solid fa-bell-slash"></i>';
+        }
+      }
+    </script>
+
+
+    <!-- Booking -->
+        <div id="book-page"class="book-body">
+          <div class="book-background">
+            <div class="book-container">
+              <div class="bcolumn">
+                          <div class="word">
+                            <h2 class="book-title">Book Court</h2>
+                          </div>
+                          <div class="book-title-below-line">
+
+                          </div>
+                      <form class="brow">
+                        
+
+                          <!-- Venue -->
+                              <div class="venue">
+                                <label class="form-label" style="font-weight: 500;">Venue</label>
+                                <div class="bckselect">
+                                  <select class="select">
+                            
+                                    <option value="1">KTDI</option>
+                                    <option value="2">KTHO</option>
+                                    <option value="3">Central Point</option>
+                                  </select>
+                                </div>
+                                
+                              </div>
+
+                              <!-- Sport -->
+                              <div class="book-sport">
+                                <label class="form-label" style="font-weight: 500;">Sport</label>
+                                <select class="select">
+                          
+                                  <option value="1">Badminton</option>
+                                  <option value="2">Basketball</option>
+                                  <option value="3">Tennis Ball</option>
+                                </select>
+                              </div>
+
+                              <!-- Date -->
+                              <div class="date">
+                                <label class="form-label" style="font-weight: 500;">Date</label>
+                                <input type="date" class="form-control">
+                              </div>
+
+                              <!-- Time -->
+                              <div class="time">
+                                    <label class="form-label" style="font-weight: 500;">Time</label>
+                                    <select class="select">
+                              
+                                      <option value="1">12:00am</option>
+                                      <option value="2">1.00am</option>
+                                      <option value="3">2.00am</option>
+                                    </select>
+                                  </div>
+
+                                <!-- hour -->
+                                <div class="hour">
+                                  <label class="form-label" style="font-weight: 500;">Hours</label>
+                                  <select class="select">
+                            
+                                    <option value="1">1hour</option>
+                                    <option value="2">2hour</option>
+                                    <option value="3">3hour</option>
+                                  </select>
+                                </div>
+
+                              
+
+                        
+                      </form>
+                      <!-- Find -->
+                      <div class="book-find">
+                        <button type="submit" class="find-btn"><i class="fa-solid fa-right-long"></i></button>
+                      </div>
+                </div>
+              </div>
+          </div>
+            </div>
+
+    <!-- Disover Card -->
+    <section id="discover-page" class="discover">
+      
+        <div class="title">
+            <h1 class="title-w">Find Social Games!</h1>
+        </div>
+        <div class="title-below-line">
+
+        </div>
+        <div class="swiper mySwiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <!-- Box1 -->
+              <div class="swiper-slide">
+
+                
+                <div class="body">
+                  <div class="card">
+                    <div class="top">
+                      <div class="userDetail">
+                          <div class="profile_img">
+                            <i class="fa-solid fa-circle-user"></i>
+                          </div>
+                          <h3>JingZhe<br><span>Come Ply Together!</span></h3>
+                      </div>
+                          <div><i class="fa-solid fa-ellipsis-vertical" id="dot"></i></div>
+                    </div>
+                    <div class="imgBox">
+                      <div class="sport">
+                        <div class="text">
+                          badminton
+                        </div>
+                      </div>
+                      <img src="image/badminton.jpg" class="cover">
+                    </div>
+                    
+                    <div class="actionBtns">
+                      <div class="left">
+                          <div class="info-box">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <div class="info">
+                              <h2>6 Dec 2022, Tuesday</h2>
+                              <p style="font-size:12px;">7.00PM-9.00PM</p>
+                            </div>
+                          </div>
+        
+                          <div class="info-box">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div class="info">
+                              <h2>KTHO, Sport Hall</h2>
+                              <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                            </div>
+                          </div>
+                          
+                          <div class="info-box">
+                            <i class="fa-solid fa-users" style="font-size:12px;"></i>
+                            <div class="info">
+                              <h2>Players : 7/8</h2>
+                            </div>
+                          </div>
+        
+                          <div class="join-detail-btn">
+                            <div class="btn-background"><button class="join">INFO</button></div>
+                            <div class="btn-background"><button class="join">JOIN</button></div>
+                            </div>
+        
+                      </div>  
+                      
+                          
+                    </div>
+                  </div>
+                </div>
+                </div>
+            <!-- Box2 -->
+            <div class="swiper-slide">
+
+                
+              <div class="body">
+                <div class="card">
+                  <div class="top">
+                    <div class="userDetail">
+                        <div class="profile_img">
+                          <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3>JingZhe<br><span>Come Ply Together!</span></h3>
+                    </div>
+                        <div><i class="fa-solid fa-ellipsis-vertical" id="dot"></i></div>
+                  </div>
+                  <div class="imgBox">
+                    <div class="sport">
+                      <div class="text">
+                        basketball
+                      </div>
+                    </div>
+                    <img src="image/basketball.jpg" class="cover">
+                  </div>
+                  
+                  <div class="actionBtns">
+                    <div class="left">
+                        <div class="info-box">
+                          <i class="fa-solid fa-calendar-days"></i>
+                          <div class="info">
+                            <h2>6 Dec 2022, Tuesday</h2>
+                            <p style="font-size:12px;">7.00PM-9.00PM</p>
+                          </div>
+                        </div>
+      
+                        <div class="info-box">
+                          <i class="fa-solid fa-location-dot"></i>
+                          <div class="info">
+                            <h2>KTHO, Sport Hall</h2>
+                            <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                          </div>
+                        </div>
+                        
+                        <div class="info-box">
+                          <i class="fa-solid fa-users" style="font-size:12px;"></i>
+                          <div class="info">
+                            <h2>Players : 7/8</h2>
+                          </div>
+                        </div>
+      
+                        <div class="join-detail-btn">
+                          <div class="btn-background"><button class="join">INFO</button></div>
+                          <div class="btn-background"><button class="join">JOIN</button></div>
+                          </div>
+      
+                    </div>  
+                    
+                        
+                  </div>
+                </div>
+              </div>
+              </div>
+            <!-- Box3 -->
+            <div class="swiper-slide">
+
+                
+              <div class="body">
+                <div class="card">
+                  <div class="top">
+                    <div class="userDetail">
+                        <div class="profile_img">
+                          <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <h3>JingZhe<br><span>Come Ply Together!</span></h3>
+                    </div>
+                        <div><i class="fa-solid fa-ellipsis-vertical" id="dot"></i></div>
+                  </div>
+                  <div class="imgBox">
+                    <div class="sport">
+                      <div class="text">
+                        futsal
+                      </div>
+                    </div>
+                    <img src="image/football.jpg" class="cover">
+                  </div>
+                  
+                  <div class="actionBtns">
+                    <div class="left">
+                        <div class="info-box">
+                          <i class="fa-solid fa-calendar-days"></i>
+                          <div class="info">
+                            <h2>6 Dec 2022, Tuesday</h2>
+                            <p style="font-size:12px;">7.00PM-9.00PM</p>
+                          </div>
+                        </div>
+      
+                        <div class="info-box">
+                          <i class="fa-solid fa-location-dot"></i>
+                          <div class="info">
+                            <h2>KTHO, Sport Hall</h2>
+                            <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                          </div>
+                        </div>
+                        
+                        <div class="info-box">
+                          <i class="fa-solid fa-users" style="font-size:12px;"></i>
+                          <div class="info">
+                            <h2>Players : 7/8</h2>
+                          </div>
+                        </div>
+      
+                        <div class="join-detail-btn">
+                          <div class="btn-background"><button class="join">INFO</button></div>
+                          <div class="btn-background"><button class="join">JOIN</button></div>
+                          </div>
+      
+                    </div>  
+                    
+                        
+                  </div>
+                </div>
+              </div>
+              </div>
+
+                <!-- Box4 -->
+                <div class="swiper-slide">
+
+                
+                  <div class="body">
+                    <div class="card">
+                      <div class="top">
+                        <div class="userDetail">
+                            <div class="profile_img">
+                              <i class="fa-solid fa-circle-user"></i>
+                            </div>
+                            <h3>JingZhe<br><span>Come Ply Together!</span></h3>
+                        </div>
+                            <div><i class="fa-solid fa-ellipsis-vertical" id="dot"></i></div>
+                      </div>
+                      <div class="imgBox">
+                        <div class="sport">
+                          <div class="text">
+                            badminton
+                          </div>
+                        </div>
+                        <img src="image/badminton.jpg" class="cover">
+                      </div>
+                      
+                      <div class="actionBtns">
+                        <div class="left">
+                            <div class="info-box">
+                              <i class="fa-solid fa-calendar-days"></i>
+                              <div class="info">
+                                <h2>6 Dec 2022, Tuesday</h2>
+                                <p style="font-size:12px;">7.00PM-9.00PM</p>
+                              </div>
+                            </div>
+          
+                            <div class="info-box">
+                              <i class="fa-solid fa-location-dot"></i>
+                              <div class="info">
+                                <h2>KTHO, Sport Hall</h2>
+                                <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                              </div>
+                            </div>
+                            
+                            <div class="info-box">
+                              <i class="fa-solid fa-users" style="font-size:12px;"></i>
+                              <div class="info">
+                                <h2>Players : 7/8</h2>
+                              </div>
+                            </div>
+          
+                            <div class="join-detail-btn">
+                              <div class="btn-background"><button class="join">INFO</button></div>
+                              <div class="btn-background"><button class="join">JOIN</button></div>
+                              </div>
+          
+                        </div>  
+                        
+                            
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+              <!-- Box5 -->
+              <div class="swiper-slide">
+  
+                  
+                <div class="body">
+                  <div class="card">
+                    <div class="top">
+                      <div class="userDetail">
+                          <div class="profile_img">
+                            <i class="fa-solid fa-circle-user"></i>
+                          </div>
+                          <h3>JingZhe<br><span>Come Ply Together!</span></h3>
+                      </div>
+                          <div><i class="fa-solid fa-ellipsis-vertical" id="dot"></i></div>
+                    </div>
+                    <div class="imgBox">
+                      <div class="sport">
+                        <div class="text">
+                          badminton
+                        </div>
+                      </div>
+                      <img src="image/badminton.jpg" class="cover">
+                    </div>
+                    
+                    <div class="actionBtns">
+                      <div class="left">
+                          <div class="info-box">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <div class="info">
+                              <h2>6 Dec 2022, Tuesday</h2>
+                              <p style="font-size:12px;">7.00PM-9.00PM</p>
+                            </div>
+                          </div>
+        
+                          <div class="info-box">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div class="info">
+                              <h2>KTHO, Sport Hall</h2>
+                              <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                            </div>
+                          </div>
+                          
+                          <div class="info-box">
+                            <i class="fa-solid fa-users" style="font-size:12px;"></i>
+                            <div class="info">
+                              <h2>Players : 7/8</h2>
+                            </div>
+                          </div>
+        
+                          <div class="join-detail-btn">
+                            <div class="btn-background"><button class="join">INFO</button></div>
+                            <div class="btn-background"><button class="join">JOIN</button></div>
+                            </div>
+        
+                      </div>  
+                      
+                          
+                    </div>
+                  </div>
+                </div>
+                </div>
+              <!-- Box6 -->
+              <div class="swiper-slide">
+  
+                  
+                <div class="body">
+                  <div class="card">
+                    <div class="top">
+                      <div class="userDetail">
+                          <div class="profile_img">
+                            <i class="fa-solid fa-circle-user"></i>
+                          </div>
+                          <h3>JingZhe<br><span>Come Ply Together!</span></h3>
+                      </div>
+                          <div><i class="fa-solid fa-ellipsis-vertical" id="dot"></i></div>
+                    </div>
+                    <div class="imgBox">
+                      <div class="sport">
+                        <div class="text">
+                          badminton
+                        </div>
+                      </div>
+                      <img src="image/badminton.jpg" class="cover">
+                    </div>
+                    
+                    <div class="actionBtns">
+                      <div class="left">
+                          <div class="info-box">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <div class="info">
+                              <h2>6 Dec 2022, Tuesday</h2>
+                              <p style="font-size:12px;">7.00PM-9.00PM</p>
+                            </div>
+                          </div>
+        
+                          <div class="info-box">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div class="info">
+                              <h2>KTHO, Sport Hall</h2>
+                              <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                            </div>
+                          </div>
+                          
+                          <div class="info-box">
+                            <i class="fa-solid fa-users" style="font-size:12px;"></i>
+                            <div class="info">
+                              <h2>Players : 7/8</h2>
+                            </div>
+                          </div>
+        
+                          <div class="join-detail-btn">
+                            <div class="btn-background"><button class="join">INFO</button></div>
+                            <div class="btn-background"><button class="join">JOIN</button></div>
+                            </div>
+        
+                      </div>  
+                      
+                          
+                    </div>
+                  </div>
+                </div>
+                </div>
+              
+            
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination" style="position:relative;margin-top:15px"></div>
+        </div>
+    </section>
+
+    <!-- category -->
+<div id="category-page" class="ct-body">
+  <h2>category</h2>
+      <div class="ct-line">
+        <div class="ct-line1"></div>
+        <div class="ct-icon"><i class="fa-solid fa-basketball"></i></div>
+        <div class="ct-line2"></div>
+      </div>
+    <div class="category">
+      <!-- category1 -->
+      <div class="ct-card">
+        <div class="ct-imgBox">
+          <img src="image/badminton.jpg">
+        </div>
+            
+        <a href="#">
+          <div class="ct-detail">
+            <h3>Badminton</h3>
+          </div>
+        </a>
+      </div>
+
+      <!-- category2 -->
+      <div class="ct-card">
+        <div class="ct-imgBox">
+          <img src="image/basketball.jpg">
+        </div>
+            
+        <a href="#">
+          <div class="ct-detail">
+            <h3>Basketball</h3>
+          </div>
+        </a>
+      </div>
+
+      <!-- category3 -->
+      <div class="ct-card">
+        <div class="ct-imgBox">
+          <img src="image/football.jpg">
+        </div>
+            
+        <a href="#">
+          <div class="ct-detail">
+            <h3>Futsal</h3>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!--  -->
+    <!-- Swiper js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        slidesPerGroup: 3,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+
+
+  
+
+
+
+</body>
+
+</html>
