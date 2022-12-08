@@ -172,7 +172,7 @@ app.get('/check', checkUser,(req,res) => {
     res.json(req.decodedToken)
 })
 
-// DISCOVER FEATURE
+// DISCOVER FEATUREe
 
 app.get('/dashboard', requireAuth, (req, res, next) => {
     if (req.decodedToken == null){
