@@ -17,11 +17,13 @@
         <% if (games.length > 0) { %>
             <% games.forEach(game => { %>  
 
-                <% if (game.toObject().sport == 'badminton') { %>
+                  <% if (game.toObject().sport == 'badminton') { %>
                     <% var image = "image/badminton.jpeg"; %> 
-                <% } else  { %>
+                <% } else if(game.toObject().sport == 'basketball') { %>
                     <% var image = "image/basketball.jpeg"; %>
-                <% } %> 
+                <% } else if(game.toObject().sport == 'futsal') { %>
+                  <% var image = "image/football.jpg"; %>
+              <% } %> 
                 
                 <% var id = game.toObject()._id %> 
                 <% var date = (game.toObject().date) %> 

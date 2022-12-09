@@ -15,7 +15,7 @@ const { removeListener } = require('./auth/config/database');
 
 const Game = require('./auth/config/databaseGame');
 const { render } = require('ejs');
-const Join = require('./auth/config/databaseJoin');
+const Join = require('./auth/config/databasejoin');
 const ObjectId = require('mongodb').ObjectID;
 const User = require("./auth/config/database");
 
@@ -401,7 +401,7 @@ app.get('/info/:id', (req, res, next) => {
         if(err){
             console.log(err);
         } else {
-            res.render('info', {data: docs, id: result})
+            res.render('info', {data: docs, id: result, decodedToken: req.decodedToken})
         }
     })
 
