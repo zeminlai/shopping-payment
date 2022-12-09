@@ -25,6 +25,12 @@ const courtSchema = new Schema({
     timestart: {
         type: String,
         required: true
+    },
+    share: {
+        type: Boolean
+    },
+    shareGameId: {
+        type: String
     }
 }, {timestamps: true})
 

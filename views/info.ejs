@@ -1,103 +1,9 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
-<head>
-
-    <!-- title -->
-    <title>Playlah</title>
-
-    <!-- NavBar -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <script src="https://kit.fontawesome.com/1fb4a11a0f.js" crossorigin="anonymous"></script>
-
-    <!-- Link -->
-    <link rel="stylesheet" href="/info.css">
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
-    />
-
-
-     <!-- Font link -->
-     <script src="https://kit.fontawesome.com/132be6e6e6.js" crossorigin="anonymous"></script>
-     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria&display=swap" rel="stylesheet">
-     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
-     <style> @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); </style>
-     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-     <style> @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap'); </style>
-</head>
+  <%- include("./partials/head.ejs") %>
 <body>
     <!-- Header -->
-    <header id="home-page">
-        <a href="/home" class = "logo">CROC</a>
-        <div class="rightSide">
-
-          <!-- dark-mode -->
-          <div class="btns dayNight">
-            <i class="fa-solid fa-moon"></i>
-            <i class="fa-solid fa-sun"></i>
-          </div>
-
-          <!-- user -->
-          <!-- <div class="btns">
-            <a href="#">
-              <i class="fa-solid fa-circle-user"></i>
-            </a>
-          </div> -->
-
-          <!-- slidebar -->
-          <div class="btns menuToggle">
-            <i class="fa-solid fa-bars"></i>
-            <i class="fa-solid fa-xmark"></i>
-          </div>
-          
-        </div>
-    </header>
-
-    
-    <!-- Navigation -->
-    <div class="navigation">
-      <ul>
-        <li class="list active">
-          <a href="/home">
-            <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
-            <span class="nav-title">Home</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a href="/#/booking">
-            <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
-            <span class="nav-title">Book</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a href="/discover">
-            <span class="nav-icon"><i class="fa-solid fa-earth-americas"></i></span>
-            <span class="nav-title">Discover</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a href="/home#category-page">
-            <span class="nav-icon"><i class="fa-solid fa-basketball"></i></span>
-            <span class="nav-title">Category</span>
-          </a>
-        </li>
-
-        <li class="list">
-          <a href="/dashboard">
-            <span class="nav-icon"><i class="fa-solid fa-calendar-days"></i></span>
-            <span class="nav-title">Upcoming</span>
-          </a>
-        </li>
-        <div class="indicator"></div>
-      </ul>
-    </div>  
-
+    <%- include("./partials/nav.ejs") %>
     <!-- Info-page -->
 
      
@@ -183,21 +89,7 @@
                             <p style="font-size:12px;"><%= data.toObject().currentPlayer %> / <%= data.toObject().playerMax %></p>
                           </div>
                       </div>
-                      
-                      <div class="dc-info-box">
-                        <i class="fa-solid fa-users" style="font-size:30px;"></i>
-                          <div class="dc-info">
-                            <h2>Players Joined</h2>
-                            <% if (users.length>0) { %>
-                              <% users.forEach(user => { %>
-                                <p style="font-size:12px;"><%= user.toObject().joinName %> / <%= user.toObject().joinContact %></p>
-                            <% }) %>
-                            <% } else {%>
-                                <p>There are no players join yet</p>
-                            <% } %>
-                          </div>
-                      </div>
-                    
+
                 </div>
     
         </div>

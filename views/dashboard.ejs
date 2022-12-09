@@ -114,9 +114,15 @@
                             </div>                     
                                 </div>
                           </div>
+                          <% if (court.share == true) {%>
                           <div class="share">
-                            <a href="<%= href %> "><button type="submit" class="share-btn"><i class="fa-solid fa-share"></i></button></a>
+                            <a href="<%= href %> "><button type="submit" class="share-btn"><i class="fa-solid fa-circle-info"></i></button></a>
                           </div>
+                          <% } else {%>
+                            <div class="share">
+                              <a href="<%= href %> "><button type="submit" class="share-btn"><i class="fa-solid fa-share"></i></button></a>
+                            </div>
+                            <% } %>
                   </div>
                 <% }) %> 
                

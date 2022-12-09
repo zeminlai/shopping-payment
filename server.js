@@ -202,16 +202,23 @@ app.get('/dashboard', requireAuth, (req, res, next) => {
 
 
 app.get('/createGame/:id', (req, res, next) => {
-    res.render('createGames', {courtId: req.params.id});
+    const courtId= req.params.id;
+    Court.findOne({_id: ObjectId(courtId)}, (err, data) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log(data);
+            res.render('createGames', {courtId: req.params.id, data: data});
+        }
+    })
 })
 
 app.post('/createGame/:id', requireAuth, (req, res, next) => {
     //user id
     const id = req.decodedToken.id;
     //courts id
-    const courtId= req.body.id;
+    const courtId = req.body.id;
     let result = courtId.trim();
-    console.log(result);
     
     Court.findOne({_id: ObjectId(result)}, (err,docs) => {
         if(err){
@@ -228,17 +235,19 @@ app.post('/createGame/:id', requireAuth, (req, res, next) => {
                         description: req.body.description,
                         sport: docs.sport,
                         date: docs.date,
-                        timeStart: req.body.timeStart,
+                        timeStart: docs.timestart,
                         timeEnd: req.body.timeEnd,
                         venue: docs.venue,
                         court: docs.court,
                         currentPlayer: req.body.currentPlayer,
                         playerMax: req.body.playerMax,
                         courtId: result,
+                        price: req.body.price,
+                        paymentMethod: req.body.paymentMethod,
                         playerIdJoin: []
                     })
                     newGame.save();
-                    res.redirect('/');
+                    res.redirect('/home');
                 }
             })
             
@@ -254,6 +263,7 @@ app.post('/createGame/:id', requireAuth, (req, res, next) => {
             } else {
                 console.log(docs);
             }
+
     })
 })
 
@@ -362,21 +372,37 @@ app.post('/court', requireAuth, (req, res, next) => {
 })
 
 app.get('/detail/:id', (req, res, next) => {
+    if (req.decodedToken == null){
+        res.redirect("/login")
+    }
     const courtId= req.params.id;
-    console.log(courtId);
     Game.findOne({courtId: courtId}, (err, data) => {
         if(err) {
             console.log(err);
         } else {
-            Join.find({oriId: data._id}, (err, data) => {
+            console.log(req.params.id + 'hi');
+            Join.find({oriId: data._id}, (err, user) => {
                 if (err) {
                     console.log(err);
                 } else {
                     console.log(data);
-                    res.render('detail');
+                    res.render('detail', {data: data, users: user,decodedToken: req.decodedToken});
                 }
             }
         )}
+    })
+
+})
+
+app.get('/info/:id', (req, res, next) => {
+    const courtId= req.params.id;
+    const result = courtId.trim();
+    Game.findOne({_id: ObjectId(result)}, (err,docs) => {
+        if(err){
+            console.log(err);
+        } else {
+            res.render('info', {data: docs, id: result})
+        }
     })
 
 })
