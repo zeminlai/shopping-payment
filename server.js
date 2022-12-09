@@ -103,7 +103,7 @@ app.post("/create-checkout-session", requireAuth, async (req,res) => {
     
         try{
             const session = await stripe.checkout.sessions.create({
-                payment_method_types: ['card', 'fpx'],
+                payment_method_types: ['card','grabpay'],
                 mode: 'payment',
                 line_items: lineItems,
                 success_url:`${process.env.SERVER_URL}/#/success`,
@@ -155,15 +155,17 @@ app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request,
         console.log('checkout complete')
         items.forEach(item =>{
             item.court.user_id = decodedToken.id
-            console.log(item.court)
             let court = new Court(item.court)
             court.save()
-                .then(result => {console.log(result)})
+                .then(result => {
+                    console.log(result)
+                })
                 .catch(err => console.log(err))
         })
     }
     response.status(200);
   });
+
 
 
 // to check for user token

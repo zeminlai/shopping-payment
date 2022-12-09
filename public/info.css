@@ -38,6 +38,7 @@ header
   width:100%;
   padding: 40px 100px;
   z-index: 10000;
+  background: var(--white);
 }
 
 header .logo
@@ -140,7 +141,7 @@ header .logo:hover
   top:-100%;
   right:5.5%;
   width:70px;
-  height: 420px;
+  height: 350px;
   display: flex;
   justify-content: top;
   align-items: top;
@@ -156,7 +157,7 @@ header .logo:hover
 .navigation.active
 {
   position: fixed;
-  top:15%;
+  top:20%;
   right:5.5%;
   visibility: visible;
   transition: 0.5s;
@@ -431,14 +432,14 @@ header .logo:hover
 {
   height:3px;
   width:200px;
-  background: var(--black);
+  background: #000;
 }
 
 .jf-line2
 {
   height:3px;
   width:200px;
-  background: var(--black);
+  background: #000;
 }
 
 .jf-icon
@@ -450,7 +451,7 @@ header .logo:hover
   align-items: center;
   border-radius:50%;
   font-size:40px;
-  color:var(--black);
+  color:var(--white);
   background: var(--rainbow);
   background-size: 500%;
   -webkit-text-fill-color: var(--white);
@@ -460,12 +461,6 @@ header .logo:hover
 
 .jf-icon:hover
 {
-  width:50px;
-  height:50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius:50%;
   background: var(--rainbow);
   background-size: 500%;
   animation: animate 20s linear infinite;
@@ -490,7 +485,7 @@ header .logo:hover
   position: relative;
   width:600px;
   min-height:1150px;
-  background: var(--white);
+  background: #fff;
   box-shadow: 15px 15px 60px rgba(0,0,0,0.15);
   border-radius:15px;
   overflow: hidden;
@@ -540,6 +535,7 @@ header .logo:hover
   align-items: center;
   width:80%;
   height:100%;
+  color:#000;
 }
 
 .dc-info-box i
@@ -547,6 +543,7 @@ header .logo:hover
   position: relative;
   font-size: 36px;
   width:60px;
+  color:#000;
 }
 .dc-info
 {
@@ -560,7 +557,7 @@ header .logo:hover
 }
 .dc-info h2
 {
-  color:var(--black);
+  color:#000;
   font-size:18px;
 }
 

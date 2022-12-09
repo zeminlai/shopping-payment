@@ -151,7 +151,7 @@ header .logo:hover
 .navigation.active
 {
   position: fixed;
-  top:15%;
+  top:20%;
   right:5.5%;
   visibility: visible;
   transition: 0.5s;

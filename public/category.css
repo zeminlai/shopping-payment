@@ -6,6 +6,7 @@
   align-items: center;
   flex-direction: column;
   gap:20px;
+  background: var(--white);
 }
 
 .ct-body h2
@@ -124,7 +125,7 @@
   position: relative;
   min-height:250px;
   width:100%;
-  background: var(--white);
+  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;

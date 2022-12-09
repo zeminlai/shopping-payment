@@ -5,7 +5,7 @@
   position: relative;
   overflow-x: hidden;
   background:linear-gradient(
-    to top, transparent, #fff
+    to top, transparent, var(--white)
   ),url(./image/Img_1.png);
   background-size: cover;
 }
