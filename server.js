@@ -163,6 +163,7 @@ app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request,
                 .catch(err => console.log(err))
         })
     }
+
     response.status(200);
   });
 
