@@ -61,3 +61,8 @@
     transform: rotate(359deg);
   }
 }
+
+.credits {
+  text-align: center;
+  font-family: 'Martian Mono', monospace;
+}
