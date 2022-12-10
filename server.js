@@ -29,7 +29,7 @@ const dbURI = process.env.MONGO_URL;
 
 mongoose.connect(dbURI)
 .then(console.log("connected to db"))
-.then(result => app.listen(8080))
+.then(result => app.listen(process.env.PORT))
 .catch(err => console.log(err));
 
 app.use(cors());
