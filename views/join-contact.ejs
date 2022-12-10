@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- title -->
+    <title>Playlah</title>
+
+    <!-- NavBar -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="/create.css">
+    <script src="https://kit.fontawesome.com/1fb4a11a0f.js" crossorigin="anonymous"></script>
+
+    <!-- Link -->
+    
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+
+
+     <!-- Font link -->
+     <script src="https://kit.fontawesome.com/132be6e6e6.js" crossorigin="anonymous"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria&display=swap" rel="stylesheet">
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+     <style> @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+     <style> @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap'); </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="home-page">
+        <a href="/home" class = "logo">CROC</a>
+        <div class="rightSide">
+
+          <!-- dark-mode -->
+          <div class="btns dayNight">
+            <i class="fa-solid fa-moon"></i>
+            <i class="fa-solid fa-sun"></i>
+          </div>
+
+          <!-- slidebar -->
+          <div class="btns menuToggle">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+          
+        </div>
+    </header>
+
+    
+    <!-- Navigation -->
+    <div class="navigation">
+      <ul>
+        <li class="list active">
+          <a href="/home">
+            <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+            <span class="nav-title">Home</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="/#/booking">
+            <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
+            <span class="nav-title">Book</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="/discover">
+            <span class="nav-icon"><i class="fa-solid fa-earth-americas"></i></span>
+            <span class="nav-title">Discover</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="/home#category-page">
+            <span class="nav-icon"><i class="fa-solid fa-basketball"></i></span>
+            <span class="nav-title">Category</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="/dashboard">
+            <span class="nav-icon"><i class="fa-solid fa-calendar-days"></i></span>
+            <span class="nav-title">Upcoming</span>
+          </a>
+        </li>
+        <div class="indicator"></div>
+      </ul>
+    </div>  
+
+    <!-- Category-page -->
+    <form method="post" action="/join/:id">
+      <div id="join-form-page" class="jf-body2">
+        
+              <div class="jf-container">
+                <!-- column -->
+                <div class="join-form2">
+                  
+                  <!-- category1 -->
+                  <div class="jf-card2">
+                    <h2>contact</h2>
+                        <div class="jf-line">
+                          <div class="jf-line1"></div>
+                          <div class="jf-icon2"><i class="fa-solid fa-address-book"></i></div>
+                          <div class="jf-line2"></div>
+                        </div>
+
+
+                      <form method="post" action="/join/:id" >
+                        <div class="jf-detail">
+                            <label for="fname" class="form-label">Name</label><br>
+                            <input type="text" id="fname" class="jf-input" name="name"><br>
+                        </div>
+                       
+                        <div class="jf-detail"> 
+                            <label for="lname" class="form-label">Contact Number</label><br>
+                            <input type="text" id="lname" class="jf-input" name="contact">
+                        </div>
+                        
+                        <!-- <input type="hidden" name="id" value="<%= courtId%> ">
+                        <input type="submit" value="Join" id="btn"> -->
+
+                        <input style="visibility: hidden;" type="hidden" name="id" value = <%= courtId %> >
+                        <button type="submit" value="Join" ><i class="fa-solid fa-right-long" id="next-btn"></i></button>
+                    </form> 
+                        
+
+                        
+                      
+
+                  </div>
+      
+          </div>
+        </div>
+      </div>
+    </form>
+    
+    <!--Dark mode-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+      let dayNight = document.querySelector('.dayNight')
+      let menuToggle = document.querySelector('.menuToggle')
+      let body = document.querySelector('body')
+      let navigation = document.querySelector('.navigation')
+      
+      dayNight.onclick = function(){
+        body.classList.toggle('dark')
+        dayNight.classList.toggle('active')
+      }
+
+      menuToggle.onclick = function(){
+        menuToggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+      }
+
+      var audio = document.getElementById('audio');
+      var playPauseBTN = document.getElementById('playPauseBTN');
+      var count = 0;
+      document.getElementById("audio").volume = 0.1;
+      function playPause(){
+        
+        if(count == 0){
+          count=1;
+          audio.play();
+          playPauseBTN.innerHTML = '<i class="fa-solid fa-headphones"></i>';
+        }
+        else{
+          count = 0;
+          audio.pause();
+          playPauseBTN.innerHTML = '<i class="fa-solid fa-bell-slash"></i>';
+        }
+      }
+    </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form method="post" action="/createGame/:id" >
+    <label for="fname">Event Name</label><br>
+        <input type="text" id="fname" name="eventName"><br>
+        <label for="lname">Time Start</label><br>
+        <input type="text" id="lname" name="timeStart">
+        <label for="lname">Time End</label><br>
+        <input type="text" id="lname" name="timeEnd">
+        <label for="lname">Maximum numbers of player to join</label><br>
+        <input type="text" id="lname" name="playerMax">
+        <label for="lname">Number of current players</label><br>
+        <input type="text" id="lname" name="currentPlayer">
+    <input type="hidden" name="id" value= >
+    <input type="submit" value="Join" id="btn">
+</form> 
+</body>
+</html> -->

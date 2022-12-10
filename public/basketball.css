@@ -65,4 +65,6 @@
 .credits {
   text-align: center;
   font-family: 'Martian Mono', monospace;
+  color:var(--black);
+  background: var(--white);
 }

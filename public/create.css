@@ -38,6 +38,7 @@ header
   width:100%;
   padding: 40px 100px;
   z-index: 10000;
+  background: var(--white);
 }
 
 header .logo
@@ -395,6 +396,18 @@ header .logo:hover
   background: var(--white);
 }
 
+.jf-body2
+{
+  position: relative;
+  min-height: 83vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap:20px;
+  background: var(--white);
+}
+
 .jf-body h2
 {
   margin-top:50px;
@@ -402,7 +415,7 @@ header .logo:hover
   font-weight: bolder;
   font-size: 80px;
   font-family: 'Alexandria', sans-serif;
-  color:var(--black);
+  color:#000;
   cursor:default;
 }
 
@@ -416,6 +429,29 @@ header .logo:hover
   -webkit-text-fill-color: transparent;
   animation: animate 20s linear infinite;
 }
+
+.jf-body2 h2
+{
+  margin-top:50px;
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 80px;
+  font-family: 'Alexandria', sans-serif;
+  color:#000;
+  cursor:default;
+}
+
+.jf-body2 h2:hover,
+.jf-body2 p:hover,
+.jf-body2 i:hover
+{
+  background: var(--rainbow);
+  background-size: 500%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate 20s linear infinite;
+}
+
 
 .jf-line
 {
@@ -431,14 +467,14 @@ header .logo:hover
 {
   height:3px;
   width:200px;
-  background: var(--black);
+  background: #000;
 }
 
 .jf-line2
 {
   height:3px;
   width:200px;
-  background: var(--black);
+  background: #000;
 }
 
 .jf-icon
@@ -458,7 +494,24 @@ header .logo:hover
   
 }
 
-.jf-icon:hover
+.jf-icon2
+{
+  font-size:28px;
+  width:50px;
+  height:50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:50%;
+  color:var(--black);
+  background: var(--rainbow);
+  background-size: 500%;
+  -webkit-text-fill-color: var(--white);
+  animation: animate 20s linear infinite;
+}
+
+.jf-icon:hover,
+.jf-icon2:hover
 {
   width:50px;
   height:50px;
@@ -485,12 +538,23 @@ header .logo:hover
   gap:50px;
 }
 
+.join-form2{
+  min-height: 80vh;
+  position: relative;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: top;
+  background: var(--white);
+  gap:50px;
+}
+
 .jf-card
 {
   position: relative;
   width:600px;
   min-height:1000px;
-  background: var(--white);
+  background: #fff;
   box-shadow: 15px 15px 60px rgba(0,0,0,0.15);
   border-radius:15px;
   overflow: hidden;
@@ -500,6 +564,23 @@ header .logo:hover
   align-items: center;
   gap:20px;
 }
+
+.jf-card2
+{
+  position: relative;
+  width:600px;
+  min-height:450px;
+  background: #fff;
+  box-shadow: 15px 15px 60px rgba(0,0,0,0.15);
+  border-radius:15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  gap:20px;
+}
+
 
 
 
@@ -533,7 +614,14 @@ header .logo:hover
 {
   position: absolute;
   font-size: 40px;
-  color:var(--black);
+  color:#000;
+}
+
+.jf-card2 i
+{
+  position: absolute;
+  font-size: 40px;
+  color:#000;
 }
 
     .form-label

@@ -291,7 +291,7 @@ app.get('/join/:id', requireAuth, (req, res, next) => {
     if (req.decodedToken == null){
         res.redirect("/login")
     }
-    res.render('join', {courtId: req.params.id, });
+    res.render('join-contact', {courtId: req.params.id, });
     
 })
 
