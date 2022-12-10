@@ -352,27 +352,27 @@ app.get('/game', requireAuth,(req, res) => {
     })
 })
 
-app.get('/court', (req, res, next) => {
-    if (req.decodedToken == null){
-        res.redirect("/login")
-    }
-    res.render('court',{decodedToken: req.decodedToken});
-})
+// app.get('/court', (req, res, next) => {
+//     if (req.decodedToken == null){
+//         res.redirect("/login")
+//     }
+//     res.render('court',{decodedToken: req.decodedToken});
+// })
 
-app.post('/court', requireAuth, (req, res, next) => {
+// app.post('/court', requireAuth, (req, res, next) => {
 
-    const id = req.decodedToken.id;
-    const newCourt = new Court({
-        user_id: id,
-        court: req.body.court,
-        sport: req.body.sport,
-        venue: req.body.venue,
-        date: req.body.date,
-        timestart: req.body.timeStart
-    })
-    newCourt.save();
-    res.redirect('/');
-})
+//     const id = req.decodedToken.id;
+//     const newCourt = new Court({
+//         user_id: id,
+//         court: req.body.court,
+//         sport: req.body.sport,
+//         venue: req.body.venue,
+//         date: req.body.date,
+//         timestart: req.body.timeStart
+//     })
+//     newCourt.save();
+//     res.redirect('/');
+// })
 
 app.get('/detail/:id', (req, res, next) => {
     if (req.decodedToken == null){
