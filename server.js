@@ -335,7 +335,7 @@ app.post('/join/:id', requireAuth, (req, res, next) => {
             
             })
 
-    res.redirect('/');
+    res.redirect('/home');
 })
 
 app.get('/game', requireAuth,(req, res) => {
