@@ -246,7 +246,7 @@ app.post('/createGame/:id', requireAuth, (req, res, next) => {
                         playerMax: req.body.playerMax,
                         courtId: result,
                         price: req.body.price,
-                        paymentMethod: req.body.paymentMethod,
+                        contact: req.body.contact,
                         playerIdJoin: []
                     })
                     newGame.save();
