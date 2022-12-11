@@ -347,7 +347,7 @@ app.get('/game', requireAuth,(req, res) => {
         if(err){
             console.log(err);
         } else {
-            res.render('game', {courts: docs,decodedToken: req.decodedToken})
+                res.render('game', {courts: docs, decodedToken: req.decodedToken})
         }
     })
 })
