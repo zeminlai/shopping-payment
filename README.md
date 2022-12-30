@@ -2,7 +2,7 @@
 Airost project on court booking website 
 
 ## Deployment
-[Live Deployed Website](https://shopping-payment-production.up.railway.app/home)
+Live Website : https://www.playlah.store/home
 
 
 [Link to store folder ](https://github.com/zeminlai/store)
