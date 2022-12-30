@@ -85,7 +85,7 @@ app.post("/create-checkout-session", requireAuth, async (req,res) => {
     decodedToken = req.decodedToken
 
     if (decodedToken === null){
-         res.json({url:"https://www.playlah.store/login"})
+         res.json({url:"https://playlah.store/login"})
     } else {
         // if user is logged in
         const lineItems = items.map(item => {
