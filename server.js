@@ -85,7 +85,7 @@ app.post("/create-checkout-session", requireAuth, async (req,res) => {
     decodedToken = req.decodedToken
 
     if (decodedToken === null){
-         res.json({url:"http://localhost:8080/login"})
+         res.json({url:"https://shopping-payment-production.up.railway.app/login"})
     } else {
         // if user is logged in
         const lineItems = items.map(item => {
