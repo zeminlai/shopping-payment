@@ -10,3 +10,5 @@ Live Website : https://www.playlah.store/home
 ## Credits
 [JingZheee](https://github.com/JingZheee), 
 Chuah Kee Yong
+
+*sign up in order to test stripe payment
