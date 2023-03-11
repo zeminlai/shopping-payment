@@ -11,6 +11,6 @@ Live Website : https://www.playlah.store/home
 ## Credits
 [JingZheee](https://github.com/JingZheee)
 
-[cjyong826](https://github.com/ckyong826)
+[ckyong826](https://github.com/ckyong826)
 
 
