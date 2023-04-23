@@ -11,7 +11,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![ezgif com-video-to-gif][product-screenshot]](https://user-images.githubusercontent.com/106502102/233853958-fe9d7a34-7c40-4a5e-a2c6-9659d8472f40.gif)
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/106502102/233853958-fe9d7a34-7c40-4a5e-a2c6-9659d8472f40.gif)
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
